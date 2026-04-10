@@ -89,11 +89,11 @@ require_supported_environment() {
   version_id="$(detect_os_version_id)"
 
   if [[ "$os_id" != "debian" && "${SETUP_DEBIAN_ALLOW_NON_DEBIAN:-0}" != "1" ]]; then
-    abort "This setup targets Debian 12 Bookworm only."
+    abort "This setup targets Debian 13 Trixie only."
   fi
 
-  if [[ "$version_id" != "12" ]]; then
-    abort "This setup targets Debian 12 Bookworm only."
+  if [[ "$version_id" != "13" ]]; then
+    abort "This setup targets Debian 13 Trixie only."
   fi
 
   if [[ "${EUID:-$(id -u)}" -eq 0 ]]; then

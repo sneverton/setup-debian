@@ -1,6 +1,6 @@
 # setup-debian
 
-Automacao de setup para Debian 12 Bookworm em maquinas headless de desenvolvimento.
+Automacao de setup para Debian 13 Trixie em maquinas headless de desenvolvimento.
 
 ## O que instala
 

@@ -20,7 +20,7 @@ test_install_runs_requested_modules_in_dry_run_mode() {
       SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
       SETUP_DEBIAN_FORCE_ARCH=x86_64 \
       SETUP_DEBIAN_FORCE_OS_ID=debian \
-      SETUP_DEBIAN_FORCE_OS_VERSION_ID=12 \
+      SETUP_DEBIAN_FORCE_OS_VERSION_ID=13 \
       SETUP_DEBIAN_MODULES=base,dotfiles \
       bash "$ROOT_DIR/install.sh"
   )"
@@ -45,7 +45,7 @@ test_install_runs_full_dry_run_without_system_dependencies() {
       SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
       SETUP_DEBIAN_FORCE_ARCH=x86_64 \
       SETUP_DEBIAN_FORCE_OS_ID=debian \
-      SETUP_DEBIAN_FORCE_OS_VERSION_ID=12 \
+      SETUP_DEBIAN_FORCE_OS_VERSION_ID=13 \
       bash "$ROOT_DIR/install.sh"
   )"
 
@@ -67,7 +67,7 @@ test_install_fails_for_unsupported_debian_release() {
       SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
       SETUP_DEBIAN_FORCE_ARCH=x86_64 \
       SETUP_DEBIAN_FORCE_OS_ID=debian \
-      SETUP_DEBIAN_FORCE_OS_VERSION_ID=11 \
+      SETUP_DEBIAN_FORCE_OS_VERSION_ID=12 \
       bash "$ROOT_DIR/install.sh" 2>&1
   )"
   status=$?
@@ -77,7 +77,7 @@ test_install_fails_for_unsupported_debian_release() {
     fail "install.sh should reject unsupported Debian releases"
   fi
 
-  assert_contains "$output" "Debian 12" "install.sh should explain the supported Debian version"
+  assert_contains "$output" "Debian 13" "install.sh should explain the supported Debian version"
 }
 
 test_install_runs_requested_modules_in_dry_run_mode
