@@ -5,6 +5,11 @@ set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 install_github_cli() {
+  if command_exists gh; then
+    log_info "GitHub CLI already installed."
+    return
+  fi
+
   run_command "Creating GitHub CLI keyring directory" sudo mkdir -p -m 755 /etc/apt/keyrings
   run_command \
     "Installing GitHub CLI GPG key" \
@@ -18,11 +23,15 @@ install_github_cli() {
 }
 
 install_release_binary() {
-  local repo="$1"
-  local version="$2"
-  local archive_url="$3"
-  local binary_name="$4"
+  local version="$1"
+  local archive_url="$2"
+  local binary_name="$3"
   local temp_dir
+
+  if command_exists "$binary_name"; then
+    log_info "$binary_name already installed."
+    return
+  fi
 
   temp_dir="$(mktemp -d)"
 
@@ -42,7 +51,6 @@ install_lazygit() {
   fi
 
   install_release_binary \
-    "jesseduffield/lazygit" \
     "$version" \
     "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${version#v}_Linux_x86_64.tar.gz" \
     "lazygit"
@@ -60,6 +68,11 @@ install_doctl() {
 
   temp_dir="$(mktemp -d)"
 
+  if command_exists doctl; then
+    log_info "doctl already installed."
+    return
+  fi
+
   run_command \
     "Downloading doctl ${version}" \
     curl -fsSL "https://github.com/digitalocean/doctl/releases/download/${version}/doctl-${version#v}-linux-amd64.tar.gz" -o "$temp_dir/doctl.tar.gz"
@@ -74,4 +87,6 @@ main() {
   install_doctl
 }
 
-main "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  main "$@"
+fi

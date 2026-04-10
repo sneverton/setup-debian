@@ -24,7 +24,6 @@ cd setup-debian
 ## Variaveis uteis
 
 - `SETUP_DEBIAN_DRY_RUN=1`: mostra as acoes sem executar instalacoes.
-- `SETUP_DEBIAN_SKIP_AUTH=1`: pula o modulo interativo de autenticacao.
 - `SETUP_DEBIAN_MODULES=base,dotfiles`: roda apenas os modulos informados.
 - `SETUP_DEBIAN_ALLOW_NON_DEBIAN=1`: permite testes fora do Debian real.
 - `SETUP_DEBIAN_FORCE_OS_ID`, `SETUP_DEBIAN_FORCE_OS_VERSION_ID`, `SETUP_DEBIAN_FORCE_ARCH`: fixam o ambiente para testes.
@@ -32,5 +31,10 @@ cd setup-debian
 ## Pos-instalacao
 
 - Abra uma nova sessao para aplicar `chsh` e o grupo `docker`.
-- Rode novamente `./install.sh` se quiser reaplicar dotfiles ou concluir autenticacoes.
-- Use `SETUP_DEBIAN_SKIP_AUTH=1` em ambientes nao interativos.
+- Rode novamente `./install.sh` se quiser reaplicar dotfiles.
+- Faca login manualmente apenas quando precisar usar cada ferramenta:
+  - `gh auth login`
+  - `copilot login`
+  - `codex --login`
+  - `claude`
+  - `doctl auth init`

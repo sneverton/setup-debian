@@ -37,11 +37,6 @@ main() {
     bash "$ROOT_DIR/scripts/${module}.sh"
   done < <(parse_modules)
 
-  if [[ "${SETUP_DEBIAN_SKIP_AUTH:-0}" != "1" ]]; then
-    log_info "Running module: auth"
-    bash "$ROOT_DIR/scripts/auth.sh"
-  fi
-
   log_info "Setup finished."
 }
 

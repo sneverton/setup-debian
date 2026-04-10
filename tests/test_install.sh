@@ -16,7 +16,6 @@ test_install_runs_requested_modules_in_dry_run_mode() {
     HOME="$sandbox/home" \
       USER="tester" \
       SETUP_DEBIAN_DRY_RUN=1 \
-      SETUP_DEBIAN_SKIP_AUTH=1 \
       SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
       SETUP_DEBIAN_FORCE_ARCH=x86_64 \
       SETUP_DEBIAN_FORCE_OS_ID=debian \
@@ -41,7 +40,6 @@ test_install_runs_full_dry_run_without_system_dependencies() {
     HOME="$sandbox/home" \
       USER="tester" \
       SETUP_DEBIAN_DRY_RUN=1 \
-      SETUP_DEBIAN_SKIP_AUTH=1 \
       SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
       SETUP_DEBIAN_FORCE_ARCH=x86_64 \
       SETUP_DEBIAN_FORCE_OS_ID=debian \
@@ -52,6 +50,9 @@ test_install_runs_full_dry_run_without_system_dependencies() {
   assert_contains "$output" "Running module: shell" "install.sh should include the shell module in the default run"
   assert_contains "$output" "Running module: node_ai" "install.sh should include the Node and AI tooling module in the default run"
   assert_contains "$output" "Running module: cloud_tools" "install.sh should include the cloud tools module in the default run"
+  if [[ "$output" == *"Running module: auth"* ]]; then
+    fail "install.sh should not run interactive login steps as part of setup"
+  fi
   assert_contains "$output" "Setup finished." "install.sh should finish during a full dry-run"
 }
 
@@ -63,7 +64,6 @@ test_install_fails_for_unsupported_debian_release() {
     HOME="$(mktemp -d)" \
       USER="tester" \
       SETUP_DEBIAN_DRY_RUN=1 \
-      SETUP_DEBIAN_SKIP_AUTH=1 \
       SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
       SETUP_DEBIAN_FORCE_ARCH=x86_64 \
       SETUP_DEBIAN_FORCE_OS_ID=debian \
