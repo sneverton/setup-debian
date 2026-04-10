@@ -1,6 +1,6 @@
 # setup-debian
 
-Automacao de setup para Debian 13 Trixie em maquinas headless de desenvolvimento.
+Automacao de setup para Debian 13 Trixie e Ubuntu em maquinas headless de desenvolvimento.
 
 ## O que instala
 
@@ -21,10 +21,13 @@ cd setup-debian
 ./install.sh
 ```
 
+O `install.sh` detecta Debian ou Ubuntu automaticamente.
+
 ## Variaveis uteis
 
 - `SETUP_DEBIAN_DRY_RUN=1`: mostra as acoes sem executar instalacoes.
 - `SETUP_DEBIAN_MODULES=base,dotfiles`: roda apenas os modulos informados.
+- `SETUP_DEBIAN_INTERACTIVE=1`: força o menu interativo de selecao de modulos.
 - `SETUP_DEBIAN_ALLOW_NON_DEBIAN=1`: permite testes fora do Debian real.
 - `SETUP_DEBIAN_FORCE_OS_ID`, `SETUP_DEBIAN_FORCE_OS_VERSION_ID`, `SETUP_DEBIAN_FORCE_ARCH`: fixam o ambiente para testes.
 

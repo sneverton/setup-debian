@@ -5,14 +5,20 @@ set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 main() {
+  local docker_repo_base
+  local repo_distro
+
+  repo_distro="$(repo_distro_name)"
+  docker_repo_base="https://download.docker.com/linux/${repo_distro}"
+
   run_command "Creating Docker keyring directory" sudo install -m 0755 -d /etc/apt/keyrings
   run_command \
     "Installing Docker GPG key" \
-    bash -lc 'curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg'
+    bash -lc "curl -fsSL ${docker_repo_base}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
   run_command "Fixing Docker key permissions" sudo chmod a+r /etc/apt/keyrings/docker.gpg
   run_command \
     "Configuring Docker apt repository" \
-    bash -lc 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null'
+    bash -lc "echo \"deb [arch=\$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] ${docker_repo_base} \$(. /etc/os-release && echo \\\"\\\$VERSION_CODENAME\\\") stable\" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null"
   run_command "Updating apt cache" sudo apt-get update
   run_command \
     "Installing Docker engine and plugins" \
