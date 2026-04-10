@@ -8,7 +8,7 @@ Automacao de setup para Debian 13 Trixie em maquinas headless de desenvolvimento
 - Python 3, pip, venv e pipx
 - Zsh, Oh My Zsh e plugins
 - Neovim, tmux e dotfiles versionados
-- Node.js LTS via `n`
+- Node.js e npm na ultima versao estavel via `n`
 - pnpm, Codex CLI, Claude Code e GitHub Copilot CLI
 - Docker Engine com Compose plugin
 - GitHub CLI, DigitalOcean CLI e LazyGit
