@@ -75,6 +75,16 @@ detect_os_version_id() {
   printf '%s\n' "$VERSION_ID"
 }
 
+detect_os_version_codename() {
+  if [[ -n "${SETUP_DEBIAN_FORCE_OS_VERSION_CODENAME:-}" ]]; then
+    printf '%s\n' "$SETUP_DEBIAN_FORCE_OS_VERSION_CODENAME"
+    return
+  fi
+
+  . /etc/os-release
+  printf '%s\n' "${UBUNTU_CODENAME:-${VERSION_CODENAME:-}}"
+}
+
 detect_arch() {
   if [[ -n "${SETUP_DEBIAN_FORCE_ARCH:-}" ]]; then
     printf '%s\n' "$SETUP_DEBIAN_FORCE_ARCH"

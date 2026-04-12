@@ -18,10 +18,12 @@ test_docker_module_uses_ubuntu_repository_on_ubuntu() {
       SETUP_DEBIAN_DRY_RUN=1 \
       SETUP_DEBIAN_FORCE_OS_ID=ubuntu \
       SETUP_DEBIAN_FORCE_OS_VERSION_ID=24.04 \
+      SETUP_DEBIAN_FORCE_OS_VERSION_CODENAME=noble \
       bash "$ROOT_DIR/scripts/docker.sh"
   )"
 
   assert_contains "$output" "https://download.docker.com/linux/ubuntu" "docker.sh should use the Ubuntu Docker repository on Ubuntu"
+  assert_contains "$output" "ubuntu noble stable" "docker.sh should resolve the Ubuntu codename before writing the Docker repository"
 }
 
 test_docker_module_uses_ubuntu_repository_on_ubuntu

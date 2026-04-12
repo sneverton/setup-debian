@@ -5,11 +5,19 @@ set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 main() {
+  local docker_repo
   local docker_repo_base
+  local repo_codename
   local repo_distro
 
   repo_distro="$(repo_distro_name)"
+  repo_codename="$(detect_os_version_codename)"
   docker_repo_base="https://download.docker.com/linux/${repo_distro}"
+  docker_repo="deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] ${docker_repo_base} ${repo_codename} stable"
+
+  if [[ -z "$repo_codename" ]]; then
+    abort "Could not determine the distribution codename for Docker repository configuration."
+  fi
 
   run_command "Creating Docker keyring directory" sudo install -m 0755 -d /etc/apt/keyrings
   run_command \
@@ -18,7 +26,7 @@ main() {
   run_command "Fixing Docker key permissions" sudo chmod a+r /etc/apt/keyrings/docker.gpg
   run_command \
     "Configuring Docker apt repository" \
-    bash -lc "echo \"deb [arch=\$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] ${docker_repo_base} \$(. /etc/os-release && echo \\\"\\\$VERSION_CODENAME\\\") stable\" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null"
+    bash -lc "printf '%s\n' '${docker_repo}' | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null"
   run_command "Updating apt cache" sudo apt-get update
   run_command \
     "Installing Docker engine and plugins" \
