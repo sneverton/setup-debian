@@ -16,7 +16,7 @@ test_install_zsh_plugin_targets_oh_my_zsh_custom_directory() {
 
   output="$(
     HOME="$sandbox/home" \
-      SETUP_DEBIAN_DRY_RUN=1 \
+      SETUP_LINUX_DRY_RUN=1 \
       install_zsh_plugin "zsh-users/zsh-autosuggestions"
   )"
 
@@ -43,7 +43,7 @@ EOF
     PATH="$fake_bin:$PATH" \
       USER="tester" \
       SHELL="/bin/bash" \
-      SETUP_DEBIAN_DRY_RUN=1 \
+      SETUP_LINUX_DRY_RUN=1 \
       set_default_shell
   )"
 
@@ -70,7 +70,7 @@ EOF
     PATH="$fake_bin:$PATH" \
       USER="tester" \
       SHELL="/bin/bash" \
-      SETUP_DEBIAN_DRY_RUN=1 \
+      SETUP_LINUX_DRY_RUN=1 \
       set_default_shell
   )"
 

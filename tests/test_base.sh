@@ -9,7 +9,7 @@ test_base_module_installs_udisks2() {
   local output
 
   output="$(
-    SETUP_DEBIAN_DRY_RUN=1 \
+    SETUP_LINUX_DRY_RUN=1 \
       bash "$ROOT_DIR/scripts/base.sh"
   )"
 

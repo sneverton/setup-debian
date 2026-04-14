@@ -24,7 +24,7 @@ EOF
 
   output="$(
     PATH="$fake_bin:$PATH" \
-      SETUP_DEBIAN_DRY_RUN=1 \
+      SETUP_LINUX_DRY_RUN=1 \
       install_release_binary "v0.0.0" "https://example.com/archive.tar.gz" "lazygit"
   )"
 
@@ -49,7 +49,7 @@ EOF
 
   output="$(
     PATH="$fake_bin:$PATH" \
-      SETUP_DEBIAN_DRY_RUN=1 \
+      SETUP_LINUX_DRY_RUN=1 \
       install_github_cli
   )"
 

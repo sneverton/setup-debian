@@ -50,7 +50,7 @@ test_run_command_prints_dry_run_without_execution() {
   marker="$sandbox/marker"
 
   output="$(
-    SETUP_DEBIAN_DRY_RUN=1 \
+    SETUP_LINUX_DRY_RUN=1 \
       run_command "sample step" touch "$marker"
   )"
 

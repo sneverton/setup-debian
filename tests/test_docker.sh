@@ -15,10 +15,10 @@ test_docker_module_uses_ubuntu_repository_on_ubuntu() {
   output="$(
     HOME="$sandbox/home" \
       USER="tester" \
-      SETUP_DEBIAN_DRY_RUN=1 \
-      SETUP_DEBIAN_FORCE_OS_ID=ubuntu \
-      SETUP_DEBIAN_FORCE_OS_VERSION_ID=24.04 \
-      SETUP_DEBIAN_FORCE_OS_VERSION_CODENAME=noble \
+      SETUP_LINUX_DRY_RUN=1 \
+      SETUP_LINUX_FORCE_OS_ID=ubuntu \
+      SETUP_LINUX_FORCE_OS_VERSION_ID=24.04 \
+      SETUP_LINUX_FORCE_OS_VERSION_CODENAME=noble \
       bash "$ROOT_DIR/scripts/docker.sh"
   )"
 

@@ -9,11 +9,11 @@ main() {
   local backup_root
 
   timestamp="$(date +%Y%m%d-%H%M%S)"
-  backup_root="${SETUP_DEBIAN_BACKUP_ROOT:-$HOME/.setup-debian-backups/$timestamp}"
+  backup_root="${SETUP_LINUX_BACKUP_ROOT:-$HOME/.setup-linux-backups/$timestamp}"
 
   ensure_dir "$HOME/.config/nvim"
 
-  if [[ "${SETUP_DEBIAN_DRY_RUN:-0}" == "1" ]]; then
+  if [[ "${SETUP_LINUX_DRY_RUN:-0}" == "1" ]]; then
     printf '[dry-run] Linking dotfiles into %s\n' "$HOME"
     return
   fi

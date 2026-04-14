@@ -15,12 +15,12 @@ test_install_runs_requested_modules_in_dry_run_mode() {
   output="$(
     HOME="$sandbox/home" \
       USER="tester" \
-      SETUP_DEBIAN_DRY_RUN=1 \
-      SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
-      SETUP_DEBIAN_FORCE_ARCH=x86_64 \
-      SETUP_DEBIAN_FORCE_OS_ID=debian \
-      SETUP_DEBIAN_FORCE_OS_VERSION_ID=13 \
-      SETUP_DEBIAN_MODULES=base,dotfiles \
+      SETUP_LINUX_DRY_RUN=1 \
+      SETUP_LINUX_ALLOW_NON_DEBIAN=1 \
+      SETUP_LINUX_FORCE_ARCH=x86_64 \
+      SETUP_LINUX_FORCE_OS_ID=debian \
+      SETUP_LINUX_FORCE_OS_VERSION_ID=13 \
+      SETUP_LINUX_MODULES=base,dotfiles \
       bash "$ROOT_DIR/install.sh"
   )"
 
@@ -39,11 +39,11 @@ test_install_runs_full_dry_run_without_system_dependencies() {
   output="$(
     HOME="$sandbox/home" \
       USER="tester" \
-      SETUP_DEBIAN_DRY_RUN=1 \
-      SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
-      SETUP_DEBIAN_FORCE_ARCH=x86_64 \
-      SETUP_DEBIAN_FORCE_OS_ID=debian \
-      SETUP_DEBIAN_FORCE_OS_VERSION_ID=13 \
+      SETUP_LINUX_DRY_RUN=1 \
+      SETUP_LINUX_ALLOW_NON_DEBIAN=1 \
+      SETUP_LINUX_FORCE_ARCH=x86_64 \
+      SETUP_LINUX_FORCE_OS_ID=debian \
+      SETUP_LINUX_FORCE_OS_VERSION_ID=13 \
       bash "$ROOT_DIR/install.sh"
   )"
 
@@ -66,11 +66,11 @@ test_install_auto_detects_ubuntu_and_runs_requested_modules_in_dry_run_mode() {
   output="$(
     HOME="$sandbox/home" \
       USER="tester" \
-      SETUP_DEBIAN_DRY_RUN=1 \
-      SETUP_DEBIAN_FORCE_ARCH=x86_64 \
-      SETUP_DEBIAN_FORCE_OS_ID=ubuntu \
-      SETUP_DEBIAN_FORCE_OS_VERSION_ID=24.04 \
-      SETUP_DEBIAN_MODULES=base,shell \
+      SETUP_LINUX_DRY_RUN=1 \
+      SETUP_LINUX_FORCE_ARCH=x86_64 \
+      SETUP_LINUX_FORCE_OS_ID=ubuntu \
+      SETUP_LINUX_FORCE_OS_VERSION_ID=24.04 \
+      SETUP_LINUX_MODULES=base,shell \
       bash "$ROOT_DIR/install.sh"
   )"
 
@@ -90,11 +90,11 @@ test_install_prompts_for_multiple_modules_interactively() {
     printf '2,5\n' | \
       HOME="$sandbox/home" \
         USER="tester" \
-        SETUP_DEBIAN_DRY_RUN=1 \
-        SETUP_DEBIAN_INTERACTIVE=1 \
-        SETUP_DEBIAN_FORCE_ARCH=x86_64 \
-        SETUP_DEBIAN_FORCE_OS_ID=ubuntu \
-        SETUP_DEBIAN_FORCE_OS_VERSION_ID=24.04 \
+        SETUP_LINUX_DRY_RUN=1 \
+        SETUP_LINUX_INTERACTIVE=1 \
+        SETUP_LINUX_FORCE_ARCH=x86_64 \
+        SETUP_LINUX_FORCE_OS_ID=ubuntu \
+        SETUP_LINUX_FORCE_OS_VERSION_ID=24.04 \
         bash "$ROOT_DIR/install.sh"
   )"
 
@@ -110,11 +110,11 @@ test_install_fails_for_unsupported_debian_release() {
   output="$(
     HOME="$(mktemp -d)" \
       USER="tester" \
-      SETUP_DEBIAN_DRY_RUN=1 \
-      SETUP_DEBIAN_ALLOW_NON_DEBIAN=1 \
-      SETUP_DEBIAN_FORCE_ARCH=x86_64 \
-      SETUP_DEBIAN_FORCE_OS_ID=debian \
-      SETUP_DEBIAN_FORCE_OS_VERSION_ID=12 \
+      SETUP_LINUX_DRY_RUN=1 \
+      SETUP_LINUX_ALLOW_NON_DEBIAN=1 \
+      SETUP_LINUX_FORCE_ARCH=x86_64 \
+      SETUP_LINUX_FORCE_OS_ID=debian \
+      SETUP_LINUX_FORCE_OS_VERSION_ID=12 \
       bash "$ROOT_DIR/install.sh" 2>&1
   )"
   status=$?

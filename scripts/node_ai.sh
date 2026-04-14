@@ -127,11 +127,11 @@ main() {
   install_n
   install_node_latest_stable
 
-  if [[ "${SETUP_DEBIAN_DRY_RUN:-0}" != "1" ]]; then
+  if [[ "${SETUP_LINUX_DRY_RUN:-0}" != "1" ]]; then
     update_npm_latest_stable
   fi
 
-  if [[ "${SETUP_DEBIAN_DRY_RUN:-0}" != "1" ]]; then
+  if [[ "${SETUP_LINUX_DRY_RUN:-0}" != "1" ]]; then
     ensure_node_constraints
   fi
 

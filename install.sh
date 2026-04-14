@@ -106,7 +106,7 @@ parse_module_selection() {
 }
 
 should_prompt_for_modules() {
-  if [[ "${SETUP_DEBIAN_INTERACTIVE:-0}" == "1" ]]; then
+  if [[ "${SETUP_LINUX_INTERACTIVE:-0}" == "1" ]]; then
     return 0
   fi
 
@@ -153,7 +153,7 @@ read_module_selection() {
 }
 
 determine_modules_to_run() {
-  local modules_csv="${SETUP_DEBIAN_MODULES:-}"
+  local modules_csv="${SETUP_LINUX_MODULES:-}"
   local selection
 
   if [[ -n "$modules_csv" ]]; then

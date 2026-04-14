@@ -53,7 +53,7 @@ EOF
 
   output="$(
     PATH="$fake_bin" \
-      SETUP_DEBIAN_DRY_RUN=1 \
+      SETUP_LINUX_DRY_RUN=1 \
       N_PREFIX="$sandbox/.n" \
       install_node_latest_stable
   )"
@@ -79,7 +79,7 @@ EOF
 
   output="$(
     PATH="$fake_bin:$PATH" \
-      SETUP_DEBIAN_DRY_RUN=1 \
+      SETUP_LINUX_DRY_RUN=1 \
       install_global_npm_package "@openai/codex" "codex"
   )"
 

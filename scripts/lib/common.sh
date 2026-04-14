@@ -26,12 +26,12 @@ command_exists() {
 }
 
 is_dry_run() {
-  [[ "${SETUP_DEBIAN_DRY_RUN:-0}" == "1" ]]
+  [[ "${SETUP_LINUX_DRY_RUN:-0}" == "1" ]]
 }
 
 installer_profile() {
-  if [[ -n "${SETUP_DEBIAN_PROFILE:-}" ]]; then
-    printf '%s\n' "$SETUP_DEBIAN_PROFILE"
+  if [[ -n "${SETUP_LINUX_PROFILE:-}" ]]; then
+    printf '%s\n' "$SETUP_LINUX_PROFILE"
     return
   fi
 
@@ -56,8 +56,8 @@ ensure_dir() {
 }
 
 detect_os_id() {
-  if [[ -n "${SETUP_DEBIAN_FORCE_OS_ID:-}" ]]; then
-    printf '%s\n' "$SETUP_DEBIAN_FORCE_OS_ID"
+  if [[ -n "${SETUP_LINUX_FORCE_OS_ID:-}" ]]; then
+    printf '%s\n' "$SETUP_LINUX_FORCE_OS_ID"
     return
   fi
 
@@ -66,8 +66,8 @@ detect_os_id() {
 }
 
 detect_os_version_id() {
-  if [[ -n "${SETUP_DEBIAN_FORCE_OS_VERSION_ID:-}" ]]; then
-    printf '%s\n' "$SETUP_DEBIAN_FORCE_OS_VERSION_ID"
+  if [[ -n "${SETUP_LINUX_FORCE_OS_VERSION_ID:-}" ]]; then
+    printf '%s\n' "$SETUP_LINUX_FORCE_OS_VERSION_ID"
     return
   fi
 
@@ -76,8 +76,8 @@ detect_os_version_id() {
 }
 
 detect_os_version_codename() {
-  if [[ -n "${SETUP_DEBIAN_FORCE_OS_VERSION_CODENAME:-}" ]]; then
-    printf '%s\n' "$SETUP_DEBIAN_FORCE_OS_VERSION_CODENAME"
+  if [[ -n "${SETUP_LINUX_FORCE_OS_VERSION_CODENAME:-}" ]]; then
+    printf '%s\n' "$SETUP_LINUX_FORCE_OS_VERSION_CODENAME"
     return
   fi
 
@@ -86,8 +86,8 @@ detect_os_version_codename() {
 }
 
 detect_arch() {
-  if [[ -n "${SETUP_DEBIAN_FORCE_ARCH:-}" ]]; then
-    printf '%s\n' "$SETUP_DEBIAN_FORCE_ARCH"
+  if [[ -n "${SETUP_LINUX_FORCE_ARCH:-}" ]]; then
+    printf '%s\n' "$SETUP_LINUX_FORCE_ARCH"
     return
   fi
 
@@ -126,7 +126,7 @@ require_supported_environment() {
 
   case "$profile" in
     debian)
-      if [[ "$os_id" != "debian" && "${SETUP_DEBIAN_ALLOW_NON_DEBIAN:-0}" != "1" ]]; then
+      if [[ "$os_id" != "debian" && "${SETUP_LINUX_ALLOW_NON_DEBIAN:-0}" != "1" ]]; then
         abort "This setup targets Debian 13 Trixie only."
       fi
 
@@ -135,7 +135,7 @@ require_supported_environment() {
       fi
       ;;
     ubuntu)
-      if [[ "$os_id" != "ubuntu" && "${SETUP_DEBIAN_ALLOW_NON_DEBIAN:-0}" != "1" ]]; then
+      if [[ "$os_id" != "ubuntu" && "${SETUP_LINUX_ALLOW_NON_DEBIAN:-0}" != "1" ]]; then
         abort "This setup targets Ubuntu only."
       fi
       ;;
